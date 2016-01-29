@@ -41,12 +41,10 @@ namespace Program
 
             List<List<Tile>> drawList = toLoadRegion.getRegionValue();
 
-            //RevealRegion(drawList);
+            RevealRegion(drawList);
 
 
-
-            rechthoekTekenen(2, 0, 64, 64);
-            rechthoekTekenen(2, 1, 64, 64);
+            //rechthoekTekenen(0, 1, 64, 32);
 
 
         }
@@ -60,7 +58,12 @@ namespace Program
             myPolygon.HorizontalAlignment = HorizontalAlignment.Left;
             myPolygon.VerticalAlignment = VerticalAlignment.Center;
 
-            int screenX = (x - y) * tileWidth / 2;
+            Point topCord = getPointTilePoint(x, y);
+            Point rightCord = getPointTilePoint(x + 1, y);
+            Point botCord = getPointTilePoint(x + 1, y + 1);
+            Point leftCord = getPointTilePoint(x, y + 1);
+
+            int screenX = (x - y) * tileWidth / 2 + Convert.ToInt32(drawingCanvas.Width);
             int screenY = (x + y) * tileHeight / 2;
 
             int pointX;
@@ -68,7 +71,7 @@ namespace Program
 
             PointCollection points = new PointCollection();
 
-            Point p = new Point(screenX, screenX);
+            Point p = new Point(screenX, screenY);
             points.Add(p);
 
             pointX = screenX + Convert.ToInt32((tileWidth / 2));
@@ -92,8 +95,17 @@ namespace Program
 
             myPolygon.Points = points;
             drawingCanvas.Children.Add(myPolygon);
+        }
 
+        private Point getPointTilePoint(int x, int y)
+        {
+            Point point = new Point();
+            int screenX = (x - y) * 64 / 2;
+            int screenY = (x + y) * 64 / 2;
 
+            point = new Point(screenX, screenY);
+
+            return point;
         }
 
         private void RevealRegion(List<List<Tile>> drawList)
@@ -101,7 +113,7 @@ namespace Program
             int i = 0;
 
             int width = 64;
-            int height = 64;
+            int height = 32;
 
             //plits the matrix in mutiple rows
             foreach (var value in drawList)

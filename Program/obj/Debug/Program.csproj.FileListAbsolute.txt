@@ -26,3 +26,17 @@ C:\Users\Titaantje\Documents\GitHub\Program\Program\obj\Debug\MainWindow.baml
 C:\Users\Titaantje\Documents\GitHub\Program\Program\obj\Debug\Program.g.resources
 C:\Users\Titaantje\Documents\GitHub\Program\Program\obj\Debug\Program.Properties.Resources.resources
 C:\Users\Titaantje\Documents\GitHub\Program\Program\obj\Debug\Program.csproj.GenerateResource.Cache
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\bin\Debug\Program.exe.config
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\Program.exe
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\Program.pdb
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\bin\Debug\Program.exe
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\bin\Debug\Program.pdb
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\Program.csprojResolveAssemblyReference.cache
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\MainWindow.g.cs
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\App.g.cs
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\Program_MarkupCompile.cache
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\Program_MarkupCompile.lref
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\MainWindow.baml
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\Program.g.resources
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\Program.Properties.Resources.resources
+C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\obj\Debug\Program.csproj.GenerateResource.Cache
