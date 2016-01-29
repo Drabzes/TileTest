@@ -12,13 +12,12 @@ namespace Program
     class DrawingTile
     {
         
-        public static void DrawTile(int x, int y, int tileWidth, int tileHeight, Tile tile)
+        public static void DrawTile(int x, int y, int tileWidth, int tileHeight)
         {
             var mainWindowInstant = (MainWindow)App.Current.MainWindow;
             Polygon myPolygon = new Polygon();
             myPolygon.Stroke = System.Windows.Media.Brushes.Black;
             myPolygon.Fill = System.Windows.Media.Brushes.LightSeaGreen;
-            myPolygon.Fill = getColor(tile);
             myPolygon.StrokeThickness = 2;
             myPolygon.HorizontalAlignment = HorizontalAlignment.Left;
             myPolygon.VerticalAlignment = VerticalAlignment.Center;
@@ -77,20 +76,6 @@ namespace Program
             point = new Point(screenX, screenY);
 
             return point;
-        }
-
-        private static SolidColorBrush getColor(Tile tile)
-        {
-            SolidColorBrush color = new SolidColorBrush();
-            if (tile.getValue() == 0)
-            {
-                color = new SolidColorBrush(Colors.LightSeaGreen);
-            }
-            else
-            {
-                color = new SolidColorBrush(Colors.Red);
-            }
-            return color;
         }
     }
 }

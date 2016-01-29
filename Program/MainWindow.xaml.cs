@@ -20,7 +20,11 @@ namespace Program
     /// </summary>
     public partial class MainWindow : Window
     {
-        BitmapImage carBitmap = new BitmapImage(new Uri(".//Tuscan_Idle_50000.png", UriKind.Relative));
+        BitmapImage carBitmap = new BitmapImage(new Uri(@"C:\Users\Titaantje\Documents\Visual Studio 2015\Projects\Program\Tiles\iso_0.png", UriKind.Absolute));
+        Image[] carImg = new Image[5];
+        Random rnd = new Random();
+
+
 
         public MainWindow()
         {
@@ -41,19 +45,8 @@ namespace Program
 
 
             //rechthoekTekenen(0, 1, 64, 32);
-        }
 
-        private void getCords(double x, double y, double tileWidth, double tileHeight)
-        {
-            double test = ((x / (tileWidth / 2) + y / (tileHeight / 2)) / 2);
-            //take the lowest cord -x
-            int mapX = Convert.ToInt32(Math.Floor(test));
-       
-            test = (y / (tileHeight / 2) - (x / (tileWidth / 2))) / 2;
-            //take the lowest cord -Y
-            int mapY = Convert.ToInt32(Math.Floor(test));
 
-            Console.WriteLine("Cord x {0} and cord y {1} ", mapX, mapY);
         }
 
         private void RevealRegion(List<List<Tile>> drawList)
@@ -69,15 +62,8 @@ namespace Program
                 //ge the value of each row
                 for (int j = 0; j < value.Count; j++)
                 {
-                    DrawingTile.DrawTile(i, j, width, height, value[j]);
+                    DrawingTile.DrawTile(i, j, width, height);
 
-                    Image tekening = new Image();
-                    tekening.Source = carBitmap;
-                    tekening.Width = 128;
-                    tekening.Height = 64;
-                    drawingCanvas.Children.Add(tekening);
-                    Canvas.SetTop(tekening, getPointTilePoint(1, 1, 64, 32).Y);
-                    Canvas.SetLeft(tekening, getPointTilePoint(1,1,64,32).X);
 
 
                     // get the value of the rectangle
@@ -88,27 +74,24 @@ namespace Program
 
                     //Canvas.SetTop(tile, j + width);
                     //Canvas.SetLeft(tile, i + height);
+
+
+
+                    /*
+                    if (value[j].getValue() == 0)
+                    {
+                        Image tekening = new Image();
+                        tekening.Source = carBitmap;
+                        tekening.Width = carBitmap.Width;
+                        tekening.Height = carBitmap.Height;
+                        drawingCanvas.Children.Add(tekening);
+                        Canvas.SetTop(tekening, i * width);
+                        Canvas.SetLeft(tekening, j * height);
+                    }
+                    */
                 }
                 i++;
             }
-        }
-
-        private Point getPointTilePoint(int x, int y, int with, int height)
-        {
-            var mainWindowInstant = (MainWindow)App.Current.MainWindow;
-            Point point = new Point();
-            int screenX = (x - y) * with / 2 + Convert.ToInt32(mainWindowInstant.drawingCanvas.Width / 2);
-            int screenY = (x + y) * height / 2;
-
-            point = new Point(screenX, screenY);
-
-            return point;
-        }
-
-        private void drawingCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var pos = this.PointToScreen(Mouse.GetPosition(this));
-            getCords(Convert.ToInt32(pos.X - (drawingCanvas.ActualWidth / 2)), Convert.ToInt32(pos.Y), 64, 32);
         }
     }  
 }
