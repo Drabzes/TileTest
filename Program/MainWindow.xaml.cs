@@ -43,6 +43,8 @@ namespace Program
 
             RevealRegion(drawList);
 
+            drawChar();
+
 
             //rechthoekTekenen(0, 1, 64, 32);
 
@@ -64,6 +66,10 @@ namespace Program
                 {
                     DrawingTile.DrawTile(i, j, width, height);
 
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> parent of 8dc4d0f... Revert "test"
 
 
                     // get the value of the rectangle
@@ -74,6 +80,33 @@ namespace Program
 
                     //Canvas.SetTop(tile, j + width);
                     //Canvas.SetLeft(tile, i + height);
+<<<<<<< HEAD
+=======
+                }
+                i++;
+            }
+
+            
+        }
+
+        private void drawChar()
+        {
+            Image tekening = new Image();
+            tekening.Source = carBitmap;
+            tekening.Width = 128;
+            tekening.Height = 64;
+            drawingCanvas.Children.Add(tekening);
+            Canvas.SetTop(tekening, getPointTilePoint(1, 1, 64, 32).Y);
+            Canvas.SetLeft(tekening, getPointTilePoint(1, 1, 64, 32).X);
+        }
+
+        private Point getPointTilePoint(int x, int y, int with, int height)
+        {
+            var mainWindowInstant = (MainWindow)App.Current.MainWindow;
+            Point point = new Point();
+            int screenX = (x - y) * with / 2 + Convert.ToInt32(mainWindowInstant.drawingCanvas.Width / 2);
+            int screenY = (x + y) * height / 2;
+>>>>>>> parent of 8dc4d0f... Revert "test"
 
 
 
@@ -92,6 +125,11 @@ namespace Program
                 }
                 i++;
             }
+        }
+
+        private void button_Click_1(object sender, RoutedEventArgs e)
+        {
+            drawChar();
         }
     }  
 }
