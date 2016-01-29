@@ -9,15 +9,21 @@
         
         mc:Ignorable="d"
 <<<<<<< HEAD
+<<<<<<< HEAD
         Title="MainWindow" Height="500" Width="650">
     <Grid x:Name="Display">
         <Canvas x:Name="drawingCanvas" HorizontalAlignment="Left" Height="1920"  Margin="10,10,0,0" VerticalAlignment="Top" Width="1200"/>
 =======
+=======
+>>>>>>> parent of 8dc4d0f... Revert "test"
         Title="MainWindow" Height="1200" Width="1200">
     <Grid x:Name="Display" Margin="0,0,0,2">
         <Canvas x:Name="drawingCanvas" HorizontalAlignment="Left" Height="1000"  Margin="10,10,0,0" VerticalAlignment="Top" Width="1200" MouseLeftButtonDown="drawingCanvas_MouseLeftButtonDown" d:IsHidden="True"/>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="29" Margin="163,1112,0,-464" VerticalAlignment="Top" Width="105" Click="button_Click_1"/>
 
+<<<<<<< HEAD
+>>>>>>> parent of 8dc4d0f... Revert "test"
+=======
 >>>>>>> parent of 8dc4d0f... Revert "test"
 
     </Grid>

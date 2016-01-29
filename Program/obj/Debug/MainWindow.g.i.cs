@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿#pragma checksum "..\..\MainWindow.xaml" "{406ea660-64cf-4c82-b6f0-42d48172a799}" "2B000E6729770A648539CD3D10CA9B3B"
+=======
+﻿#pragma checksum "..\..\MainWindow.xaml" "{406ea660-64cf-4c82-b6f0-42d48172a799}" "7A5EA5DDB2D07CC56C1375B251E623D4"
+>>>>>>> parent of 8dc4d0f... Revert "test"
 =======
 ﻿#pragma checksum "..\..\MainWindow.xaml" "{406ea660-64cf-4c82-b6f0-42d48172a799}" "7A5EA5DDB2D07CC56C1375B251E623D4"
 >>>>>>> parent of 8dc4d0f... Revert "test"
@@ -114,6 +118,15 @@ namespace Program {
             return;
             case 3:
             this.drawingCanvas = ((System.Windows.Controls.Canvas)(target));
+            return;
+            case 4:
+            this.button = ((System.Windows.Controls.Button)(target));
+            
+            #line 14 "..\..\MainWindow.xaml"
+            this.button.Click += new System.Windows.RoutedEventHandler(this.button_Click_1);
+            
+            #line default
+            #line hidden
             return;
             case 4:
             this.button = ((System.Windows.Controls.Button)(target));

@@ -67,6 +67,10 @@ namespace Program
                     DrawingTile.DrawTile(i, j, width, height);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> parent of 8dc4d0f... Revert "test"
 =======
                     
 >>>>>>> parent of 8dc4d0f... Revert "test"
@@ -125,6 +129,11 @@ namespace Program
                 }
                 i++;
             }
+        }
+
+        private void button_Click_1(object sender, RoutedEventArgs e)
+        {
+            drawChar();
         }
 
         private void button_Click_1(object sender, RoutedEventArgs e)
