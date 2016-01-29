@@ -39,8 +39,6 @@ namespace Program
 
             RevealRegion(drawList);
 
-            drawChar();
-
 
             //rechthoekTekenen(0, 1, 64, 32);
         }
@@ -73,7 +71,13 @@ namespace Program
                 {
                     DrawingTile.DrawTile(i, j, width, height, value[j]);
 
-                    
+                    Image tekening = new Image();
+                    tekening.Source = carBitmap;
+                    tekening.Width = 128;
+                    tekening.Height = 64;
+                    drawingCanvas.Children.Add(tekening);
+                    Canvas.SetTop(tekening, getPointTilePoint(1, 1, 64, 32).Y);
+                    Canvas.SetLeft(tekening, getPointTilePoint(1,1,64,32).X);
 
 
                     // get the value of the rectangle
@@ -87,19 +91,6 @@ namespace Program
                 }
                 i++;
             }
-
-            
-        }
-
-        private void drawChar()
-        {
-            Image tekening = new Image();
-            tekening.Source = carBitmap;
-            tekening.Width = 128;
-            tekening.Height = 64;
-            drawingCanvas.Children.Add(tekening);
-            Canvas.SetTop(tekening, getPointTilePoint(1, 1, 64, 32).Y);
-            Canvas.SetLeft(tekening, getPointTilePoint(1, 1, 64, 32).X);
         }
 
         private Point getPointTilePoint(int x, int y, int with, int height)
@@ -118,11 +109,6 @@ namespace Program
         {
             var pos = this.PointToScreen(Mouse.GetPosition(this));
             getCords(Convert.ToInt32(pos.X - (drawingCanvas.ActualWidth / 2)), Convert.ToInt32(pos.Y), 64, 32);
-        }
-
-        private void button_Click_1(object sender, RoutedEventArgs e)
-        {
-            drawChar();
         }
     }  
 }
