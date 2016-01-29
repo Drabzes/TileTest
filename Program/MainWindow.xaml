@@ -1,31 +1,14 @@
-﻿<Window x:Name="venster" x:Class="Program.MainWindow"
-        WindowState="Maximized"
-        
+﻿<Window x:Class="Program.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program"
-        
         mc:Ignorable="d"
-<<<<<<< HEAD
-<<<<<<< HEAD
+        WindowState="Maximized"
         Title="MainWindow" Height="500" Width="650">
     <Grid x:Name="Display">
-        <Canvas x:Name="drawingCanvas" HorizontalAlignment="Left" Height="1920"  Margin="10,10,0,0" VerticalAlignment="Top" Width="1200"/>
-=======
-=======
->>>>>>> parent of 8dc4d0f... Revert "test"
-        Title="MainWindow" Height="1200" Width="1200">
-    <Grid x:Name="Display" Margin="0,0,0,2">
-        <Canvas x:Name="drawingCanvas" HorizontalAlignment="Left" Height="1000"  Margin="10,10,0,0" VerticalAlignment="Top" Width="1200" MouseLeftButtonDown="drawingCanvas_MouseLeftButtonDown" d:IsHidden="True"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="29" Margin="163,1112,0,-464" VerticalAlignment="Top" Width="105" Click="button_Click_1"/>
-
-<<<<<<< HEAD
->>>>>>> parent of 8dc4d0f... Revert "test"
-=======
->>>>>>> parent of 8dc4d0f... Revert "test"
+        <Canvas x:Name="drawingCanvas" HorizontalAlignment="Left" Height="1200" Margin="10,10,0,0" VerticalAlignment="Top" Width="1920" MouseLeftButtonDown="drawingCanvas_MouseLeftButtonDown"/>
 
     </Grid>
-
 </Window>

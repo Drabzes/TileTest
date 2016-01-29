@@ -20,7 +20,7 @@ namespace Program
     /// </summary>
     public partial class MainWindow : Window
     {
-        BitmapImage carBitmap = new BitmapImage(new Uri(@"C:\Users\Titaantje\Documents\Visual Studio 2015\Projects\Program\Tiles\iso_0.png", UriKind.Absolute));
+        BitmapImage carBitmap = new BitmapImage(new Uri(".//Tuscan_Idle_60000.png", UriKind.Relative));
         Image[] carImg = new Image[5];
         Random rnd = new Random();
 
@@ -43,8 +43,6 @@ namespace Program
 
             RevealRegion(drawList);
 
-            drawChar();
-
 
             //rechthoekTekenen(0, 1, 64, 32);
 
@@ -64,16 +62,10 @@ namespace Program
                 //ge the value of each row
                 for (int j = 0; j < value.Count; j++)
                 {
-                    DrawingTile.DrawTile(i, j, width, height);
+                    DrawingTile.DrawTile(i, j, width, height, value[j]);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
                     
->>>>>>> parent of 8dc4d0f... Revert "test"
-=======
-                    
->>>>>>> parent of 8dc4d0f... Revert "test"
 
 
                     // get the value of the rectangle
@@ -84,17 +76,10 @@ namespace Program
 
                     //Canvas.SetTop(tile, j + width);
                     //Canvas.SetLeft(tile, i + height);
-<<<<<<< HEAD
-=======
+
                 }
                 i++;
             }
-
-            
-        }
-
-        private void drawChar()
-        {
             Image tekening = new Image();
             tekening.Source = carBitmap;
             tekening.Width = 128;
@@ -110,35 +95,31 @@ namespace Program
             Point point = new Point();
             int screenX = (x - y) * with / 2 + Convert.ToInt32(mainWindowInstant.drawingCanvas.Width / 2);
             int screenY = (x + y) * height / 2;
->>>>>>> parent of 8dc4d0f... Revert "test"
 
-
-
-                    /*
-                    if (value[j].getValue() == 0)
-                    {
-                        Image tekening = new Image();
-                        tekening.Source = carBitmap;
-                        tekening.Width = carBitmap.Width;
-                        tekening.Height = carBitmap.Height;
-                        drawingCanvas.Children.Add(tekening);
-                        Canvas.SetTop(tekening, i * width);
-                        Canvas.SetLeft(tekening, j * height);
-                    }
-                    */
-                }
-                i++;
-            }
+            return point;
         }
+            
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
-            drawChar();
         }
+        private void getCords(double x, double y, double tileWidth, double tileHeight)
+       {
+           double test = ((x / (tileWidth / 2) + y / (tileHeight / 2)) / 2);
+           //take the lowest cord -x
+           int mapX = Convert.ToInt32(Math.Floor(test));
+      
+           test = (y / (tileHeight / 2) - (x / (tileWidth / 2))) / 2;
+           //take the lowest cord -Y
+            int mapY = Convert.ToInt32(Math.Floor(test));
 
-        private void button_Click_1(object sender, RoutedEventArgs e)
+            Console.WriteLine("Cord x {0} and cord y {1} ", mapX, mapY);
+          }
+
+        private void drawingCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            drawChar();
+            var pos = this.PointToScreen(Mouse.GetPosition(this));
+            getCords(Convert.ToInt32(pos.X - (drawingCanvas.ActualWidth / 2)), Convert.ToInt32(pos.Y), 64, 32);
         }
     }  
 }
