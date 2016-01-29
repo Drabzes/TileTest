@@ -29,8 +29,6 @@ namespace Program
         public MainWindow()
         {
             InitializeComponent();
-
-
             // inisialize map
             Map map = new Map();
 
@@ -50,7 +48,7 @@ namespace Program
 
         }
 
-        private void rechthoekTekenen(int x, int y, int tileWidth, int tileHeight)
+        private void DrawTile(int x, int y, int tileWidth, int tileHeight)
         {
             Polygon myPolygon = new Polygon();
             myPolygon.Stroke = System.Windows.Media.Brushes.Black;
@@ -64,7 +62,7 @@ namespace Program
             Point botCord = getPointTilePoint(x + 1, y + 1);
             Point leftCord = getPointTilePoint(x, y + 1);
 
-            int screenX = (x - y) * tileWidth / 2 + Convert.ToInt32(drawingCanvas.Width);
+            int screenX = (x - y) * tileWidth / 2 + Convert.ToInt32(drawingCanvas.Width / 2);
             int screenY = (x + y) * tileHeight / 2;
 
             int pointX;
@@ -123,7 +121,7 @@ namespace Program
                 for (int j = 0; j < value.Count; j++)
                 {
 
-                    rechthoekTekenen(i, j, width, height);
+                    DrawTile(i, j, width, height);
 
 
                     // get the value of the rectangle
