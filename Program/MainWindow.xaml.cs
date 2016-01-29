@@ -30,6 +30,7 @@ namespace Program
         {
             InitializeComponent();
 
+
             // inisialize map
             Map map = new Map();
 
