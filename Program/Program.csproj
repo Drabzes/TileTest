@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CreateVisualMap.cs" />
+    <Compile Include="DrawingTile.cs" />
     <Compile Include="IsoHelper.cs" />
     <Compile Include="ReadRegion.cs" />
     <Compile Include="Region.cs" />
