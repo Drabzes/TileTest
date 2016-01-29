@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="650">
     <Grid x:Name="Display">
-        <Canvas x:Name="drawingCanvas" HorizontalAlignment="Left" Height="1920"  Margin="10,10,0,0" VerticalAlignment="Top" Width="1200"/>
+        <Canvas x:Name="drawingCanvas" HorizontalAlignment="Left" Height="1920"  Margin="10,10,0,0" VerticalAlignment="Top" Width="1200" MouseLeftButtonDown="drawingCanvas_MouseLeftButtonDown"/>
 
     </Grid>
     
