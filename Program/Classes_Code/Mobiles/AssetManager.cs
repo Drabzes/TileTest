@@ -19,12 +19,17 @@ namespace Program
             {
                 
 
-                //load the directory
-                string assetsPlayer = "Classes Code\\Assets\\Mobile\\Player\\";
-                string relativeFile = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"\Classes Code\Assets\Mobile\Player\";
-                var pathnaam = Path.GetDirectoryName(assetsPlayer);
-                DirectoryInfo di = new DirectoryInfo(relativeFile);
+                //Look for the path we want
+                string assetsPlayer = "Assets\\Mobile\\Player";
+                //make the path
+                var path = Environment.CurrentDirectory;
+                path = Path.GetFullPath(Path.Combine(path, @"..\..\"));
+                path = Path.Combine(path, assetsPlayer);
 
+                //put the path info in the directoryInfo
+                DirectoryInfo di = new DirectoryInfo(path);
+                //shorten the path
+                path = Path.GetFullPath(Path.Combine(path, @"..\..\..\"));
                 //look in all directories
                 foreach (var d in di.GetDirectories())
                 {
@@ -36,9 +41,11 @@ namespace Program
                         //Console.WriteLine(@"{0}\{1}\{2}",assetsPlayer,d,fi);
 
                         // reads every image en puts it in a list & put it in a bitImage
-                        BitmapImage b = new BitmapImage(new Uri(String.Format(@"{0}\{1}\{2}", assetsPlayer, d, fi), UriKind.Absolute));
+                        
+                        path += String.Format(@"{0}\{1}\{2}", assetsPlayer, d, fi);
+                        BitmapImage b = new BitmapImage(new Uri(path, UriKind.Absolute));
                         bitImage n = new bitImage(fi.ToString(), b);
-
+                        path = Path.GetFullPath(Path.Combine(path, @"..\..\..\..\..\"));
                         image.Add(n);
 
                         //check in which directory the image is from
