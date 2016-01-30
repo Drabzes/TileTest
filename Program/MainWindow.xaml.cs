@@ -20,7 +20,8 @@ namespace Program
     /// </summary>
     public partial class MainWindow : Window
     {
-        //BitmapImage carBitmap = new BitmapImage(new Uri(".//Tuscan_Idle_60000.png", UriKind.Absolute));
+        Player player = new Player("Giel", new Point(1, 1), AssetManager.readMobilePlayer());
+        BitmapImage carBitmap = new BitmapImage(new Uri(@"C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\bin\Debug\Tuscan_Idle_60000.png", UriKind.Absolute));
         //Image[] carImg = new Image[5];
         //Random rnd = new Random();
 
@@ -42,12 +43,24 @@ namespace Program
             List<List<Tile>> drawList = toLoadRegion.getRegionValue();
 
             RevealRegion(drawList);
+            
+            
+            
+            
 
-            AssetManager.readMobilePlayer();
+            drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
 
-            //rechthoekTekenen(0, 1, 64, 32);
+        }
 
-
+        private void drawCharacter(Point cord, BitmapImage bitImage)
+        {
+            Image tekening = new Image();
+            tekening.Source = bitImage;
+            tekening.Width = 128;
+            tekening.Height = 64;
+            drawingCanvas.Children.Add(tekening);
+            Canvas.SetTop(tekening, getPointTilePoint(Convert.ToInt32(cord.X), Convert.ToInt32(cord.Y), 64, 32).Y);
+            Canvas.SetLeft(tekening, getPointTilePoint(Convert.ToInt32(cord.X), Convert.ToInt32(cord.Y), 64, 32).X);
         }
 
         private void RevealRegion(List<List<Tile>> drawList)
@@ -81,21 +94,16 @@ namespace Program
                 }
                 i++;
             }
-            //Image tekening = new Image();
-            //tekening.Source = carBitmap;
-            //tekening.Width = 128;
-            //tekening.Height = 64;
-            //drawingCanvas.Children.Add(tekening);
-            //Canvas.SetTop(tekening, getPointTilePoint(1, 1, 64, 32).Y);
-            //Canvas.SetLeft(tekening, getPointTilePoint(1, 1, 64, 32).X);
+            
         }
 
         private Point getPointTilePoint(int x, int y, int with, int height)
         {
             var mainWindowInstant = (MainWindow)App.Current.MainWindow;
             Point point = new Point();
-            int screenX = (x - y) * with / 2 + Convert.ToInt32(mainWindowInstant.drawingCanvas.Width / 2);
+            int screenX = (x - y) * with / 2 + Convert.ToInt32(drawingCanvas.Width / 2);
             int screenY = (x + y) * height / 2;
+            point = new Point(screenX, screenY);
 
             return point;
         }
@@ -104,7 +112,7 @@ namespace Program
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
         }
-        private void getCords(double x, double y, double tileWidth, double tileHeight)
+        private Point getCords(double x, double y, double tileWidth, double tileHeight)
        {
            double test = ((x / (tileWidth / 2) + y / (tileHeight / 2)) / 2);
            //take the lowest cord -x
@@ -115,12 +123,28 @@ namespace Program
             int mapY = Convert.ToInt32(Math.Floor(test));
 
             Console.WriteLine("Cord x {0} and cord y {1} ", mapX, mapY);
+            Point cord = new Point(mapX, mapY);
+            return cord;
           }
 
         private void drawingCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Point cordClick = new Point();
+            // get the clicked cordinations
             var pos = this.PointToScreen(Mouse.GetPosition(this));
-            getCords(Convert.ToInt32(pos.X - (drawingCanvas.ActualWidth / 2)), Convert.ToInt32(pos.Y), 64, 32);
+            //convert to isometric cord values
+            cordClick = getCords(Convert.ToInt32(pos.X - (drawingCanvas.ActualWidth / 2)), Convert.ToInt32(pos.Y), 64, 32);
+            player.setPosition(cordClick);
+            //drawingCanvas.Children.Clear();
+            
+            //Clear all images from the canvas
+            var images = drawingCanvas.Children.OfType<Image>().ToList();
+            foreach (var image in images)
+            {
+                drawingCanvas.Children.Remove(image);
+            }
+            
+            drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
         }
     }  
 }
