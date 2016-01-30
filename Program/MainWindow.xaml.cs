@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading.Tasks;
+using System.Timers;
 
 namespace Program
 {
@@ -21,39 +23,41 @@ namespace Program
     public partial class MainWindow : Window
     {
         Player player = new Player("Giel", new Point(1, 1), AssetManager.readMobilePlayer());
-        BitmapImage carBitmap = new BitmapImage(new Uri(@"C:\Users\Titaantje\Documents\GitHub\Program\TileTest\Program\bin\Debug\Tuscan_Idle_60000.png", UriKind.Absolute));
-        //Image[] carImg = new Image[5];
-        //Random rnd = new Random();
-
+        Timer aTimer = new Timer();
+        int startNumber = 60000;
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
 
 
         public MainWindow()
         {
             InitializeComponent();
-
+            
             // inisialize map
             Map map = new Map();
 
             //load a reagion into the map.
             map.addMap(ReadRegion.Read(".//Region 1.xml"));
-
             
+            //get the region to load
             Region toLoadRegion = map.getmap(0);
 
             List<List<Tile>> drawList = toLoadRegion.getRegionValue();
 
+            //show the map
             RevealRegion(drawList);
-            
-            
-            
-            
 
+            //add an character to a map
             drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
-
         }
 
         private void drawCharacter(Point cord, BitmapImage bitImage)
         {
+            var images = drawingCanvas.Children.OfType<Image>().ToList();
+            foreach (var image in images)
+            {
+                drawingCanvas.Children.Remove(image);
+            }
+
             Image tekening = new Image();
             tekening.Source = bitImage;
             tekening.Width = 128;
@@ -76,21 +80,8 @@ namespace Program
                 //ge the value of each row
                 for (int j = 0; j < value.Count; j++)
                 {
+                    //Draws a Tile
                     DrawingTile.DrawTile(i, j, width, height, value[j]);
-
-
-                    
-
-
-                    // get the value of the rectangle
-                    //Rectangle tile = CreateVisualMap.draw(value[j].getValue(), width, height);
-                    //RotateTransform rotation = new RotateTransform();
-                    ////tile.LayoutTransform = new RotateTransform(45, 0, 0);
-                    //drawingCanvas.Children.Add(tile);
-
-                    //Canvas.SetTop(tile, j + width);
-                    //Canvas.SetLeft(tile, i + height);
-
                 }
                 i++;
             }
@@ -143,8 +134,31 @@ namespace Program
             {
                 drawingCanvas.Children.Remove(image);
             }
+            //drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
+            string testwalk = String.Format("Tuscan_Walk_{0}.png", startNumber);
+            drawCharacter(player.getPointposition(), player.getWalk(testwalk));
+
             
-            drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
+            dispatcherTimer.Start();
         }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            
+            if (startNumber < 60015)
+            {
+                string testwalk = String.Format("Tuscan_Walk_{0}.png", startNumber);
+                drawCharacter(player.getPointposition(), player.getWalk(testwalk));
+                startNumber++;
+            }
+            else{
+                drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
+                startNumber = 60000;
+                dispatcherTimer.Stop();
+            }
+        }
+
     }  
 }

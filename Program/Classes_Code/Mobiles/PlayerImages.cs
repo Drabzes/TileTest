@@ -128,6 +128,11 @@ namespace Program
                 {
                     image = n.getImage();
                 }
+
+            }
+            if (image == null)
+            {
+                Console.WriteLine("Coulnd find {0}", name);
             }
             return image;
         }

@@ -17,10 +17,9 @@ namespace Program
             PlayerImages playerImage = new PlayerImages();
             try
             {
-                
-
                 //Look for the path we want
                 string assetsPlayer = "Assets\\Mobile\\Player";
+
                 //make the path
                 var path = Environment.CurrentDirectory;
                 path = Path.GetFullPath(Path.Combine(path, @"..\..\"));
@@ -30,6 +29,7 @@ namespace Program
                 DirectoryInfo di = new DirectoryInfo(path);
                 //shorten the path
                 path = Path.GetFullPath(Path.Combine(path, @"..\..\..\"));
+
                 //look in all directories
                 foreach (var d in di.GetDirectories())
                 {
@@ -79,7 +79,7 @@ namespace Program
             }
             catch(Exception ex) when (ex is DirectoryNotFoundException || ex is FileNotFoundException)
             {
-                System.Windows.MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show(ex.Message, "Error loading something", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
                 return playerImage;
             }
