@@ -59,6 +59,7 @@
     <Compile Include="Classes_Code\Mobiles\bitImage.cs" />
     <Compile Include="Classes_Code\Map\CreateVisualMap.cs" />
     <Compile Include="Classes_Code\Tiles\DrawingTile.cs" />
+    <Compile Include="DateTimeNowCache.cs" />
     <Compile Include="IsoHelper.cs" />
     <Compile Include="Classes_Code\Mobiles\Mobile.cs" />
     <Compile Include="Classes_Code\Mobiles\MobilePlayer.cs" />

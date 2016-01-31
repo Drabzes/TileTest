@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Program
 {
@@ -42,7 +43,17 @@ namespace Program
 
         public Region getmap(int index)
         {
-            return _map[index];
+            try
+            {
+                return _map[index];
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+                return null;
+            }
+            
         }
     }
 }

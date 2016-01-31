@@ -1,4 +1,4 @@
-﻿<Window x:Class="Program.MainWindow"
+﻿<Window x:Name="MainwindowGame" x:Class="Program.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,9 +6,14 @@
         xmlns:local="clr-namespace:Program"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Title="MainWindow" Height="500" Width="650">
+        Title="MainWindow" Height="500" Width="650" ContentRendered="MainwindowGame_ContentRendered">
     <Grid x:Name="Display">
-        <Canvas x:Name="drawingCanvas" HorizontalAlignment="Left" Height="1200" Margin="10,10,0,0" VerticalAlignment="Top" Width="1920" MouseLeftButtonDown="drawingCanvas_MouseLeftButtonDown"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="65*"/>
+            <ColumnDefinition Width="255*"/>
+            <ColumnDefinition Width="322*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="drawingCanvas" HorizontalAlignment="Left" Height="1200" Margin="10,10,-1288,-741" VerticalAlignment="Top" Width="1920" MouseLeftButtonDown="drawingCanvas_MouseLeftButtonDown" Grid.ColumnSpan="3"/>
 
     </Grid>
 </Window>

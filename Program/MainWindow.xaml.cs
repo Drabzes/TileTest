@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,8 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Threading.Tasks;
-using System.Timers;
 
 namespace Program
 {
@@ -23,21 +20,45 @@ namespace Program
     public partial class MainWindow : Window
     {
         Player player = new Player("Giel", new Point(1, 1), AssetManager.readMobilePlayer());
-        Timer aTimer = new Timer();
-        int startNumber = 60000;
-        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-
+        Map map = new Map();
 
         public MainWindow()
         {
             InitializeComponent();
             
             // inisialize map
-            Map map = new Map();
+           
 
             //load a reagion into the map.
             map.addMap(ReadRegion.Read(".//Region 1.xml"));
+
+            ////get the region to load
+            //Region toLoadRegion = map.getmap(0);
+
+            //List<List<Tile>> drawList = toLoadRegion.getRegionValue();
+
+            ////show the map
+            //RevealRegion(drawList);
+
+            //add an character to a map
+            //drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
+        }
+
+        private void start()
+        {
+            int lastTime = DateTimeNowCache.GetDateTime();
+            while (true)
+            {
+                //int current = DateTimeNowCache.GetDateTime();
+                //int elapsed = current - lastTime;
+                //lastTime = current;
+                render();
+            }
             
+        }
+
+        private void render()
+        {
             //get the region to load
             Region toLoadRegion = map.getmap(0);
 
@@ -45,26 +66,36 @@ namespace Program
 
             //show the map
             RevealRegion(drawList);
-
-            //add an character to a map
-            drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
         }
+
+
 
         private void drawCharacter(Point cord, BitmapImage bitImage)
         {
-            var images = drawingCanvas.Children.OfType<Image>().ToList();
-            foreach (var image in images)
+            try
             {
-                drawingCanvas.Children.Remove(image);
+                //var images = drawingCanvas.Children.OfType<Image>().ToList();
+                //foreach (var image in images)
+                //{
+                //    drawingCanvas.Children.Remove(image);
+                //}
+                drawingCanvas.Children.Clear();
+                //the image taht will be drawn
+                Image tekening = new Image();
+                tekening.Source = bitImage;
+                tekening.Width = 128;
+                tekening.Height = 64;
+                drawingCanvas.Children.Add(tekening);
+                // take the center of the image and place it on the tile
+                Canvas.SetTop(tekening, getPointTilePoint(Convert.ToInt32(cord.X), Convert.ToInt32(cord.Y), 64, 32).Y - tekening.Height / 2);
+                Canvas.SetLeft(tekening, getPointTilePoint(Convert.ToInt32(cord.X), Convert.ToInt32(cord.Y), 64, 32).X - tekening.Width / 2);
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
             }
 
-            Image tekening = new Image();
-            tekening.Source = bitImage;
-            tekening.Width = 128;
-            tekening.Height = 64;
-            drawingCanvas.Children.Add(tekening);
-            Canvas.SetTop(tekening, getPointTilePoint(Convert.ToInt32(cord.X), Convert.ToInt32(cord.Y), 64, 32).Y);
-            Canvas.SetLeft(tekening, getPointTilePoint(Convert.ToInt32(cord.X), Convert.ToInt32(cord.Y), 64, 32).X);
         }
 
         private void RevealRegion(List<List<Tile>> drawList)
@@ -125,6 +156,9 @@ namespace Program
             var pos = this.PointToScreen(Mouse.GetPosition(this));
             //convert to isometric cord values
             cordClick = getCords(Convert.ToInt32(pos.X - (drawingCanvas.ActualWidth / 2)), Convert.ToInt32(pos.Y), 64, 32);
+            //the cords are always 1 to high because it never starts at 0,0
+            cordClick.X = cordClick.X - 1;
+            cordClick.Y = cordClick.Y - 1;
             player.setPosition(cordClick);
             //drawingCanvas.Children.Clear();
             
@@ -134,31 +168,14 @@ namespace Program
             {
                 drawingCanvas.Children.Remove(image);
             }
-            //drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
-            string testwalk = String.Format("Tuscan_Walk_{0}.png", startNumber);
-            drawCharacter(player.getPointposition(), player.getWalk(testwalk));
-
-            
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
-            dispatcherTimer.Start();
+            drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
+            //string testwalk = String.Format("Tuscan_Walk_{0}.png", startNumber);
+            //drawCharacter(player.getPointposition(), player.getWalk(testwalk));
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void MainwindowGame_ContentRendered(object sender, EventArgs e)
         {
-            
-            if (startNumber < 60015)
-            {
-                string testwalk = String.Format("Tuscan_Walk_{0}.png", startNumber);
-                drawCharacter(player.getPointposition(), player.getWalk(testwalk));
-                startNumber++;
-            }
-            else{
-                drawCharacter(player.getPointposition(), player.getIdleImage("Tuscan_Idle_60000.png"));
-                startNumber = 60000;
-                dispatcherTimer.Stop();
-            }
+            start();
         }
-
     }  
 }
